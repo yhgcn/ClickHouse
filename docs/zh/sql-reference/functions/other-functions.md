@@ -1,6 +1,6 @@
 # 其他函数 {#qi-ta-han-shu}
 
-## 主机名() {#hostname}
+## hostName() {#hostname}
 
 返回一个字符串，其中包含执行此函数的主机的名称。 对于分布式处理，如果在远程服务器上执行此函数，则将返回远程服务器主机的名称。
 
@@ -77,12 +77,12 @@ SELECT 'some-file-name' AS a, basename(a)
 
 如果将`NULL`作为参数传递给函数，那么它返回`Nullable（Nothing）`类型，它对应于ClickHouse中的内部`NULL`。
 
-## 块大小() {#function-blocksize}
-
+## blockSize() {#function-blocksize}
+块大小
 获取Block的大小。
 在ClickHouse中，查询始终工作在Block（包含列的部分的集合）上。此函数允许您获取调用其的块的大小。
 
-## 实现(x) {#materializex}
+## materialize(x) {#materializex}
 
 将一个常量列变为一个非常量列。
 在ClickHouse中，非常量列和常量列在内存中的表示方式不同。尽管函数对于常量列和非常量总是返回相同的结果，但它们的工作方式可能完全不同（执行不同的代码）。此函数用于调试这种行为。
@@ -92,7 +92,7 @@ SELECT 'some-file-name' AS a, basename(a)
 接受任何参数，包括`NULL`。始终返回0。
 但是，函数的参数总是被计算的。该函数可以用于基准测试。
 
-## 睡眠（秒) {#sleepseconds}
+## sleep（秒) {#sleepseconds}
 
 在每个Block上休眠’seconds’秒。可以是整数或浮点数。
 
@@ -100,7 +100,7 @@ SELECT 'some-file-name' AS a, basename(a)
 
 在每行上休眠’seconds’秒。可以是整数或浮点数。
 
-## 当前数据库() {#currentdatabase}
+## currentDatabase() {#currentdatabase}
 
 返回当前数据库的名称。
 当您需要在CREATE TABLE中的表引擎参数中指定数据库，您可以使用此函数。
@@ -123,7 +123,7 @@ SELECT 'some-file-name' AS a, basename(a)
 如果表不存在，该函数将引发异常。
 对于嵌套数据结构中的元素，该函数检查是否存在列。 对于嵌套数据结构本身，函数返回0。
 
-## 酒吧 {#function-bar}
+## bar {#function-bar}
 
 使用unicode构建图表。
 
@@ -176,7 +176,7 @@ ORDER BY h ASC
     │ 23 │ 400397 │ █████████████▎     │
     └────┴────────┴────────────────────┘
 
-## 变换 {#transform}
+## transform {#transform}
 
 根据定义，将某些元素转换为其他元素。
 此函数有两种使用方式：
@@ -273,23 +273,23 @@ SELECT
     │      192851925 │ 183.92 MiB │
     └────────────────┴────────────┘
 
-## 至少(a,b) {#leasta-b}
+## least(a,b) {#leasta-b}
 
 返回a和b中的最小值。
 
-## 最伟大(a,b) {#greatesta-b}
+## greatest(a,b) {#greatesta-b}
 
 返回a和b的最大值。
 
-## 碌莽禄time拢time() {#uptime}
+## uptime() {#uptime}
 
 返回服务正常运行的秒数。
 
-## 版本() {#version}
+## version() {#version}
 
 以字符串形式返回服务器的版本。
 
-## 时区() {#timezone}
+## timezone() {#timezone}
 
 返回服务器的时区。
 
@@ -305,7 +305,7 @@ SELECT
 
 返回行所在结果集中的序列号。此函数仅考虑受影响的Block。
 
-## 运行差异(x) {#other_functions-runningdifference}
+## neighbor(x) {#other_functions-runningdifference}
 
 计算数据块中相邻行的值之间的差异。
 对于第一行返回0，并为每个后续行返回与前一行的差异。
@@ -340,7 +340,7 @@ FROM
     │    1110 │ 2016-11-24 00:00:10 │     1 │
     └─────────┴─────────────────────┴───────┘
 
-## 运行差异启动与第一值 {#runningdifferencestartingwithfirstvalue}
+## runningDifferenceStartingWithFirstValue {#runningdifferencestartingwithfirstvalue}
 
 与[运行差异](./other-functions.md#other_functions-runningdifference)相同，区别在于第一行返回第一行的值，后续每个后续行返回与上一行的差值。
 
@@ -477,7 +477,7 @@ FROM
 
     1 rows in set. Elapsed: 0.002 sec.
 
-## 复制 {#replicate}
+## replicate {#replicate}
 
 使用单个值填充一个数组。
 
@@ -502,19 +502,19 @@ FROM
     │ [1,1,1]                       │
     └───────────────────────────────┘
 
-## 文件系统可用 {#filesystemavailable}
+## filesystemAvailable {#filesystemavailable}
 
 返回磁盘的剩余空间信息（以字节为单位）。使用配置文件中的path配置评估此信息。
 
-## 文件系统容量 {#filesystemcapacity}
+## filesystemCapacity {#filesystemcapacity}
 
 返回磁盘的容量信息，以字节为单位。使用配置文件中的path配置评估此信息。
 
-## 最后聚会 {#function-finalizeaggregation}
+## finalizeAggregation {#function-finalizeaggregation}
 
 获取聚合函数的状态。返回聚合结果（最终状态）。
 
-## 跑累积 {#function-runningaccumulate}
+## runningAccumulate {#function-runningaccumulate}
 
 获取聚合函数的状态并返回其具体的值。这是从第一行到当前行的所有行累计的结果。
 
